@@ -5,10 +5,16 @@
       <button (click)="addNewPost()">Add new Post</button>
     </div>
 
-    <div class="posts">
-      <p *ngFor="let post of strictPosts"
+    <ng-container *ngIf="strictPosts; else elseTemplate" class="posts">
+      <ul *ngFor="let post of strictPosts"
           class="post" (click)="getPostById(post.id)">
-        {{post.title}}
-      </p>
-    </div>
+        <li>{{post.title}}</li>
+      </ul>
+    </ng-container>
+    <ng-template #elseTemplate>
+        <h4>No Posts available....</h4>
+    </ng-template>
+    
+
+    
 </div>
