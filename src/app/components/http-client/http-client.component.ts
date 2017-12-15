@@ -24,22 +24,36 @@ export class HttpClientComponent implements OnInit {
   getStrictPosts() {
     this._http.getStrictPosts()
       .subscribe(
-        posts => { this.strictPosts = posts; },
-        err => {
-          console.log('Something went wrong!');
-          console.log(err);
-        }
+      posts => { this.strictPosts = posts; },
+      err => {
+        console.log('Something went wrong!');
+        console.log(err);
+      }
       )
   }
 
   getPostById(postId: number) {
-    
 
     this._http.getPostById(postId)
-        .subscribe((post)=>{
-          console.log("POST => ");
-          console.log(post);
-        })
+      .subscribe((post) => {
+        console.log("POST => ");
+        console.log(post);
+      })
+  }
+
+  addNewPost(): void {
+    let newPost: Post = {
+      userId: 1,
+      id: 777,
+      title: "New Post",
+      body: "The best Post In The World"
+    };
+
+    this._http.addPost(newPost)
+      .subscribe((response) => {
+        console.log('addPost response');
+        console.log(response);
+      })
   }
 
   // getPosts() {
