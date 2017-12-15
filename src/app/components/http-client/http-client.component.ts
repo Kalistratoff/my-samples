@@ -18,7 +18,7 @@ export class HttpClientComponent implements OnInit {
 
   ngOnInit() {
     this.getStrictPosts();
-    this.getPosts();
+    // this.getPosts();
   }
 
   getStrictPosts() {
@@ -32,10 +32,20 @@ export class HttpClientComponent implements OnInit {
       )
   }
 
-  getPosts() {
-    this._http.getPosts()
-      .subscribe((posts) => {
-        this.posts = posts;
-      })
+  getPostById(postId: number) {
+    
+
+    this._http.getPostById(postId)
+        .subscribe((post)=>{
+          console.log("POST => ");
+          console.log(post);
+        })
   }
+
+  // getPosts() {
+  //   this._http.getPosts()
+  //     .subscribe((posts) => {
+  //       this.posts = posts;
+  //     })
+  // }
 }

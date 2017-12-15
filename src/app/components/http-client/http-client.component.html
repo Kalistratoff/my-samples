@@ -1,7 +1,10 @@
-<div>
+<div class="posts">
     <h2>Sctrict posts below:</h2>
 
-    <div>
-      <p *ngFor="let post of strictPosts">{{post.title}}</p>
+    <div class="posts">
+      <p *ngFor="let post of strictPosts"
+          class="post" (click)="getPostById(post.id)">
+        {{post.title}}
+      </p>
     </div>
 </div>
