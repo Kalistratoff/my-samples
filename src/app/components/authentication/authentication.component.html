@@ -1,0 +1,78 @@
+<br>
+<div class="container">
+  <button class="btn btn-primary" (click)="registerView=!registerView"> Register  </button>
+  <button class="btn btn-success" (click)="loginView=!loginView"> Login  </button>
+  <button class="btn btn-danger" (click)="logOut()"> Logout  </button>
+</div>
+<br>
+
+<!-- REGISTER -->
+<div class="container" *ngIf="registerView">
+  <h3>Register Form</h3>
+  <br>
+
+  <form #registerForm="ngForm" (ngSubmit)="submitRegisterForm()">
+    <div class="form-group row">
+      <label for="email" class="col-sm-2 col-form-label">Email</label>
+      <div class="col-sm-6">
+        <input type="email" class="form-control" id="email" placeholder="email" [(ngModel)]="registerModel.email" name="email" required>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="password" class="col-sm-2 col-form-label">Password</label>
+      <div class="col-sm-6">
+        <input type="password" class="form-control" id="password" placeholder="Password" [(ngModel)]="registerModel.password" name="password"
+          required>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="offset-sm-2 col-sm-6">
+        <button class="btn btn-primary" [class.btn-disabled]="!registerForm.form.valid" [disabled]="!registerForm.form.valid">Register</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!-- LOGIN -->
+<div class="container" *ngIf="loginView">
+  <h3>Login Form</h3>
+  <br>
+
+  <form #loginForm="ngForm" (ngSubmit)="submitLoginForm()">
+    <div class="form-group row">
+      <label for="email" class="col-sm-2 col-form-label">Email</label>
+      <div class="col-sm-6">
+        <input type="email" class="form-control" id="email" placeholder="email" [(ngModel)]="loginModel.email" name="email" required>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="password" class="col-sm-2 col-form-label">Password</label>
+      <div class="col-sm-6">
+        <input type="password" class="form-control" id="password" placeholder="Password" [(ngModel)]="loginModel.password" name="password"
+          required>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="offset-sm-2 col-sm-6">
+        <button class="btn btn-primary" [class.btn-disabled]="!loginForm.form.valid" [disabled]="!loginForm.form.valid">Login</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+<hr>
+
+<div class="container">
+  <h1>USER? => {{ (authService.user | async)? 'LOGGED IN!' : 'NO USER'}}</h1>
+  <div *ngIf="(authService.user | async)">
+    <button class="btn btn-default" (click)="showUserInfo = !showUserInfo">
+    Show user Info
+  </button>
+    <!-- INFO ABOUT USER -->
+    <pre *ngIf="showUserInfo">
+      {{ ((authService.user | async)| json) }}
+    </pre>
+  </div>
+
+</div>
